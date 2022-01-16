@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "sibook",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,7 @@
+{
+  "name": "sibook",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
