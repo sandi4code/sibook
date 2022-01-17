@@ -11,9 +11,13 @@
       <ion-label>Transaksi</ion-label>
     </ion-tab-button>
 
+    <ion-tab-button>
+      <ion-icon></ion-icon>
+    </ion-tab-button>
+
     <ion-tab-button tab="debt">
       <ion-icon name="receipt-outline"></ion-icon>
-      <ion-label>Hutang/Piutang</ion-label>
+      <ion-label>Hutang</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="account">
@@ -23,3 +27,16 @@
   </ion-tab-bar>
 
 </ion-tabs>
+
+<ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab-button><ion-icon name="grid-outline"></ion-icon></ion-fab-button>
+  <ion-fab-list side="top">
+    <ion-fab-button><ion-icon name="logo-angular"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="start">
+    <ion-fab-button><ion-icon name="logo-ionic"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+  <ion-fab-list side="end">
+    <ion-fab-button><ion-icon name="logo-ionic"></ion-icon></ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
