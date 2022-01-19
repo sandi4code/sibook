@@ -1,8 +1,24 @@
 ion-tab-bar {
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0px 0px 20px rgb(0 0 0 / 10%);
+  border-radius: 24px 24px 0 0;
   height: 64px;
+  --border: 0;
+  --background: transparent;
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  left:0;
+  right: 0;
+  width: 100%;
+  &:after{
+    background: var(--ion-color-light);
+    content: " ";
+    height: 15px;
+    width: 80px;
+    bottom: 0;
+    position: absolute;
+  }
   ion-tab-button {
+    background: var(--ion-color-light);
     flex: 1;
     max-width: 25%;
     &.tab-selected {
@@ -20,4 +36,23 @@ ion-tab-bar {
       transition: 200ms all ease-in-out;
     }
   }
+  ion-tab-button.transaction {
+    margin-right: 0px;
+    border-top-right-radius: 18px;
+  }
+  ion-tab-button.debt {
+    margin-left: 0px;
+    border-top-left-radius: 18px;
+  }
+  svg {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    width: 80px;
+    path{
+      fill:  var(--ion-color-light);
+    }
+  }
+}
+ion-fab {
+  bottom: 30px;
 }

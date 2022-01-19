@@ -6,16 +6,17 @@
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="transaction">
+    <ion-tab-button tab="transaction" class="transaction">
       <ion-icon name="card-outline"></ion-icon>
       <ion-label>Transaksi</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button>
-      <ion-icon></ion-icon>
-    </ion-tab-button>
+    <!-- <div class="tab-spacer"></div> -->
+    <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path>
+    </svg>
 
-    <ion-tab-button tab="debt">
+    <ion-tab-button tab="debt" class="debt">
       <ion-icon name="receipt-outline"></ion-icon>
       <ion-label>Hutang</ion-label>
     </ion-tab-button>
@@ -30,7 +31,7 @@
 
 <ion-fab vertical="bottom" horizontal="center" slot="fixed">
   <ion-fab-button><ion-icon name="grid-outline"></ion-icon></ion-fab-button>
-  <ion-fab-list side="top">
+  <!-- <ion-fab-list side="top">
     <ion-fab-button><ion-icon name="logo-angular"></ion-icon></ion-fab-button>
   </ion-fab-list>
   <ion-fab-list side="start">
@@ -38,5 +39,5 @@
   </ion-fab-list>
   <ion-fab-list side="end">
     <ion-fab-button><ion-icon name="logo-ionic"></ion-icon></ion-fab-button>
-  </ion-fab-list>
+  </ion-fab-list> -->
 </ion-fab>

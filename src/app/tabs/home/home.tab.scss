@@ -1,0 +1,16 @@
+app-home-tab {
+  background: linear-gradient(180deg, rgba(139, 80, 255, 0) 0%, rgba(139, 80, 255, 0.24) 100%);
+  ion-header {
+    background: linear-gradient(183.33deg, #FFF6E6 9.56%, rgba(248, 237, 216, 0) 124.27%);
+    border-radius: 0px 0px 32px 32px;
+    &::after {
+      display: none;
+    }
+    ion-toolbar {
+      --background: transparent;
+    }
+  }
+  ion-content {
+    --background: transparent;
+  }
+}
