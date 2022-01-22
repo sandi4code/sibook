@@ -50,4 +50,11 @@ ion-tab-bar {
 }
 ion-fab {
   bottom: 24px;
+  ion-fab-list {
+    top: -48px;
+    margin-inline: 48px;
+    // .fab-list-side-end {
+
+    // }
+  }
 }
