@@ -3,22 +3,14 @@ ion-tab-bar {
   height: 64px;
   --border: 0;
   --background: transparent;
-  background: transparent;
+  background: transparent url(../../assets/nav.svg) no-repeat center bottom;
   position: absolute;
   bottom: 0;
   left:0;
   right: 0;
   width: 100%;
-  &:after{
-    background: var(--ion-color-light);
-    content: " ";
-    height: 15px;
-    width: 80px;
-    bottom: 0;
-    position: absolute;
-  }
   ion-tab-button {
-    background: var(--ion-color-light);
+    background: #fcfcfc;
     flex: 1;
     max-width: 25%;
     &.tab-selected {
@@ -44,6 +36,9 @@ ion-tab-bar {
     margin-left: 0px;
     border-top-left-radius: 18px;
   }
+  .tab-spacer {
+    width: 76px;
+  }
   svg {
     align-self: flex-end;
     margin-bottom: 10px;
@@ -54,5 +49,5 @@ ion-tab-bar {
   }
 }
 ion-fab {
-  bottom: 30px;
+  bottom: 24px;
 }
