@@ -1,0 +1,26 @@
+ion-header {
+  &::after {
+    display: none;
+  }
+  ion-toolbar {
+    --background: none;
+    ion-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+ion-content {
+  h3 {
+    color: #0d0e0f;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 0;
+  }
+  .filter {
+    margin-bottom: 24px;
+    ion-button.button-outline {
+      --border-width: 1px;
+    }
+  }
+}
