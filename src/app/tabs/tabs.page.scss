@@ -28,24 +28,8 @@ ion-tab-bar {
       transition: 200ms all ease-in-out;
     }
   }
-  ion-tab-button.transaction {
-    margin-right: 0px;
-    border-top-right-radius: 18px;
-  }
-  ion-tab-button.debt {
-    margin-left: 0px;
-    border-top-left-radius: 18px;
-  }
   .tab-spacer {
     width: 76px;
-  }
-  svg {
-    align-self: flex-end;
-    margin-bottom: 10px;
-    width: 80px;
-    path{
-      fill:  var(--ion-color-light);
-    }
   }
 }
 ion-fab {
@@ -53,8 +37,5 @@ ion-fab {
   ion-fab-list {
     top: -48px;
     margin-inline: 48px;
-    // .fab-list-side-end {
-
-    // }
   }
 }
