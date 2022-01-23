@@ -2,16 +2,16 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AccountTab } from './account.tab';
-import { AccountTabRoutingModule } from './account-routing.module';
+import { SavingTab } from './saving.tab';
+import { SavingTabRoutingModule } from './saving-routing.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    AccountTabRoutingModule
+    SavingTabRoutingModule
   ],
-  declarations: [AccountTab]
+  declarations: [SavingTab]
 })
-export class AccountTabModule {}
+export class SavingTabModule {}

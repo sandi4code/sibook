@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: () => import('./debt/debt.module').then(m => m.DebtTabModule)
       },
       {
-        path: 'account',
-        loadChildren: () => import('./account/account.module').then(m => m.AccountTabModule)
+        path: 'saving',
+        loadChildren: () => import('./saving/saving.module').then(m => m.SavingTabModule)
       },
       {
         path: '',

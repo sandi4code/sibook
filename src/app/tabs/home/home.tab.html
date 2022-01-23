@@ -1,3 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Selamat Pagi Siti Nuraisyah</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true">
   <div class="summary">
     <div class="balance">
@@ -21,14 +31,14 @@
       </div>
     </div>
   </div>
-  <div class="recent-transaction">
+  <div class="transaction">
     <h2>
       Transaksi Terakhir
       <ion-button shape="round">
         Lihat Semua
       </ion-button>
     </h2>
-    <ion-list>
+    <ion-list *ngFor="let item of [0,1,2,3,4,5]">
       <ion-item class="in" lines="none">
         <ion-icon src="../../../assets/icon/summary-income.svg" slot="start"></ion-icon>
         <ion-label>
