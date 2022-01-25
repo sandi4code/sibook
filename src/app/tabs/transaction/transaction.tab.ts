@@ -19,8 +19,8 @@ export class TransactionTab {
       component: TransactionFilterModal,
       componentProps: { value: 123 },
       cssClass: 'modal-filter',
-      initialBreakpoint: 0.65,
-      breakpoints: [0, 0.65, 1],
+      initialBreakpoint: 0.5,
+      breakpoints: [0, 0.5, 1],
       swipeToClose: true,
       keyboardClose: true
     });

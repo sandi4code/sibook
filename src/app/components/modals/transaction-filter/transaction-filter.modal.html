@@ -14,8 +14,8 @@
     <ng-container *ngFor="let t of types">
       <ion-button (click)="onSelectType(t.value)" 
         [fill]="type == t.value ? 'solid':'outline'"
-        [color]="type == t.value ? 'secondary':'primary'"
-        shape="round">
+        [color]="type == t.value ? 'secondary':'medium'"
+        shape="round" size="small">
         {{t.title}}
       </ion-button>
     </ng-container>
@@ -25,13 +25,13 @@
     <ng-container *ngFor="let s of sorts">
       <ion-button (click)="onSelectSort(s.value)" 
         [fill]="sort == s.value ? 'solid':'outline'"
-        [color]="sort == s.value ? 'secondary':'primary'"
-        shape="round">
+        [color]="sort == s.value ? 'secondary':'medium'"
+        shape="round" size="small">
         {{s.title}}
       </ion-button>
     </ng-container>
   </div>
-  <ion-button (click)="onSubmit()" expand="block" shape="round" size="large">
+  <ion-button (click)="onSubmit()" expand="block" shape="round">
     Terapkan
   </ion-button>
 </ion-content>
