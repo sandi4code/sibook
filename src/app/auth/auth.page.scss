@@ -1,0 +1,21 @@
+ion-slides {
+  height: calc(100vh - 190px);
+  margin-bottom: 16px;
+  ion-slide {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    p {
+      color: #91919f;
+      font-size: 16px;
+    }
+  }
+}
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

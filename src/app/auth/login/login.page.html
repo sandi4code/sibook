@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="auth"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Masuk</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="input" [ngClass]="{'invalid': email.invalid && (email.dirty || email.touched)}">
+      <input type="text" inputmode="email" placeholder="Email" [formControl]="email" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+        <div *ngIf="email.errors?.['required']">
+          Email harus diisi.
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          Format email salah.
+        </div>
+      </div>
+    </div>
+    <div class="input" [ngClass]="{'invalid': password.invalid && (password.dirty || password.touched)}">
+      <input type="password" inputmode="password" placeholder="Password" [formControl]="password" required>
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+        <div *ngIf="password.errors?.['required']">
+          Password harus diisi.
+        </div>
+        <div *ngIf="password.errors?.['minlength']">
+          Password minimal 8 karakter.
+        </div>
+      </div>
+    </div>
+    <div class="ion-padding-vertical">
+      <ion-button color="primary" expand="block" [disabled]="!isValid() || loading" (click)="onSubmit()">
+        Masuk
+        <ng-container *ngIf="loading"><ion-spinner></ion-spinner></ng-container>
+      </ion-button>
+    </div>
+    <div class="ion-padding-vertical ion-text-center">
+      <a>Lupa Password?</a>
+    </div>
+    <div class="ion-padding-vertical ion-text-center">
+      Belum punya akun? <a [routerLink]="['/auth/register']">Daftar</a>
+    </div>
+  </div>
+</ion-content>

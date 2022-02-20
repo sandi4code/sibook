@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="auth"></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Daftar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="container">
+    <div class="input" [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}">
+      <input type="text" placeholder="Nama" [formControl]="name" required>
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+        <div *ngIf="name.errors?.['required']">
+          Nama harus diisi.
+        </div>
+      </div>
+    </div>
+    <div class="input" [ngClass]="{'invalid': email.invalid && (email.dirty || email.touched)}">
+      <input type="text" inputmode="email" placeholder="Email" [formControl]="email" required>
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+        <div *ngIf="email.errors?.['required']">
+          Email harus diisi.
+        </div>
+        <div *ngIf="email.errors?.['email']">
+          Format email salah.
+        </div>
+      </div>
+    </div>
+    <div class="input" [ngClass]="{'invalid': password.invalid && (password.dirty || password.touched)}">
+      <input type="password" inputmode="password" placeholder="Password" [formControl]="password" required>
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+        <div *ngIf="password.errors?.['required']">
+          Password harus diisi.
+        </div>
+        <div *ngIf="password.errors?.['minlength']">
+          Password minimal 8 karakter.
+        </div>
+      </div>
+    </div>
+    <div class="ion-padding-vertical">
+      <ion-button color="primary" expand="block" [disabled]="(name.invalid || email.invalid || password.invalid) || loading" (click)="onSubmit()">
+        Daftar
+        <ng-container *ngIf="loading"><ion-spinner></ion-spinner></ng-container>
+      </ion-button>
+    </div>
+    <div class="ion-padding-vertical ion-text-center">
+      Sudah punya akun? <a [routerLink]="['/auth/login']">Masuk</a>
+    </div>
+  </div>
+</ion-content>

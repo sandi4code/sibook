@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.sinursa.sibook",
 	"appName": "sibook",
 	"webDir": "www",
 	"bundledWebRuntime": false

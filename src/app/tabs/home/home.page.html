@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Selamat Pagi Siti Nuraisyah</ion-title>
+    <ion-title>
+      <div class="greeting">{{greeting()}}, </div>
+      {{user?.displayName}}
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon slot="icon-only" name="settings-outline"></ion-icon>
@@ -12,7 +15,7 @@
   <div class="summary">
     <div class="balance">
       <ion-label>Saldo</ion-label>
-      Rp20.000.000
+      {{balance?.value | rupiah}}
     </div>
     <div class="in-out">
       <div class="in">
@@ -34,7 +37,7 @@
   <div class="transaction">
     <h2>
       Transaksi Terakhir
-      <ion-button shape="round">
+      <ion-button shape="round" size="small">
         Lihat Semua
       </ion-button>
     </h2>

@@ -8,6 +8,10 @@ app-home-tab {
       ion-title {
         font-size: 18px;
         font-weight: 500;
+        .greeting {
+          font-size: 14px;
+          font-weight: normal;
+        }
       }
     }
   }
@@ -82,6 +86,9 @@ app-home-tab {
         ion-button {
           --background: #e6d9ff;
           color: var(--ion-color-primary);
+          font-size: 13px;
+          font-weight: 500;
+          height: 32px;
         }
       }
       ion-list {

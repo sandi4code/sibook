@@ -2,16 +2,18 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HomeTab } from './home.tab';
+import { HomePage } from './home.page';
 import { HomeTabRoutingModule } from './home-routing.module';
+import { PipeModule } from 'src/app/pipes/pipe.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    HomeTabRoutingModule
+    HomeTabRoutingModule,
+    PipeModule
   ],
-  declarations: [HomeTab]
+  declarations: [HomePage]
 })
 export class HomeTabModule {}
