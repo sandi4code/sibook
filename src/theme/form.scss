@@ -1,14 +1,40 @@
 .input {
   margin-bottom: 16px;
-  input {
+  input, select {
     background: #fff;
     border: 1px solid #f1f1fa;
     border-radius: 16px;
     color: #91919f;
     font-size: 16px;
     height: 50px;
+    outline: none;
     padding: 12px 16px;
     width: 100%;
+    &::placeholder {
+      color: #91919f;
+    }
+    &[type="date"]:before {
+      content: attr(placeholder) !important;
+      color: #91919f;
+      margin-right: 0.5em;
+    }
+    &[type="date"]:focus:before,
+    &[type="date"]:valid:before {
+      content: "" !important;
+    }
+  }
+  textarea {
+    background: #fff;
+    border: 1px solid #f1f1fa;
+    border-radius: 16px;
+    color: #91919f;
+    font-size: 16px;
+    outline: none;
+    padding: 12px 16px;
+    width: 100%;
+    &::placeholder {
+      color: #91919f;
+    }
   }
   &.invalid {
     input {

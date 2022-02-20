@@ -35,7 +35,12 @@ ion-tab-bar {
 ion-fab {
   bottom: 24px;
   ion-fab-list {
-    top: -48px;
-    margin-inline: 48px;
+    top: -56px;
+    margin-inline-start: 48px;
+    margin-inline-end: 48px;
+    ion-fab-button {
+      height: 48px;
+      width: 48px;
+    }
   }
 }

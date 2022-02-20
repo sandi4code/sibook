@@ -11,9 +11,14 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
+    path: 'transaction',
+    loadChildren: () => import('./pages/transaction/transaction.module').then( m => m.TransactionModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
-  }
+  },
 ];
 
 @NgModule({
