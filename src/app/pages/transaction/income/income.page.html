@@ -11,19 +11,23 @@
   <div class="container">
     <div class="amount">
       <ion-label>Berapa jumlahnya?</ion-label>
-      <input type="number">
+      <input type="text" currencyMask
+        [(ngModel)]="amount"
+        (click)="amountFocus = true"
+        (focus)="amountFocus = true"
+        (blur)="amountFocus = false">
     </div>
-    <div class="details">
+    <div class="details" *ngIf="!amountFocus">
       <div class="input">
-        <input type="date" placeholder="Tanggal" required>
+        <input type="date" [(ngModel)]="date" placeholder="Tanggal" required>
       </div>
       <div class="input">
-        <select placeholder="Kategori">
+        <select [(ngModel)]="category" placeholder="Kategori">
           <option value=""></option>
         </select>
       </div>
       <div class="input">
-        <textarea rows="3" placeholder="Keterangan"></textarea>
+        <textarea rows="3" [(ngModel)]="description" placeholder="Keterangan"></textarea>
       </div>
       <ion-button (click)="onSubmit()" expand="block" color="primary">
         Simpan

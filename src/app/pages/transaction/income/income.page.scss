@@ -26,28 +26,16 @@ ion-content {
         background: transparent;
         border: none;
         color: #fcfcfc;
-        font-size: 56px;
+        font-size: 42px;
         font-weight: 600;
         outline: none;
         width: 100%;
-        &::before {
-          content: 'Rp';
-        }
-        &:focus {
-          position: absolute;
-          bottom: 40px;
-          box-shadow: 0 0 20px 20px rgba(0,0,0,0.5);
-          width: calc(100% - 32px);
-          background: #fff;
-          color: #000;
-          z-index: 999;
-        }
       }
     }
-    .details {
-      background: #fff;
-      border-radius: 32px 32px 0 0;
-      padding: 24px 16px;
-    }
   }
+}
+.details {
+  background: #fff;
+  border-radius: 32px 32px 0 0;
+  padding: 24px 16px;
 }
