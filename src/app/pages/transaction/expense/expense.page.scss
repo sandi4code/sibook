@@ -1,0 +1,44 @@
+ion-header {
+  ion-toolbar {
+    --background: transparent;
+    color: #fff;
+    ion-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+}
+ion-content {
+  --background: transparent;
+  .container {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    .amount {
+      padding: 16px;
+      ion-label {
+        color: rgba(252, 252, 252, 0.65);
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      input {
+        background: transparent;
+        border: none;
+        color: #fcfcfc;
+        font-size: 42px;
+        font-weight: 600;
+        outline: none;
+        width: 100%;
+        &.invalid {
+          color: #cf3c4f;
+        }
+      }
+    }
+  }
+}
+.details {
+  background: #fff;
+  border-radius: 32px 32px 0 0;
+  padding: 24px 16px;
+}

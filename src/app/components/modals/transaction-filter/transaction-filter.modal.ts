@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,9 +7,10 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./transaction-filter.modal.scss']
 })
 export class TransactionFilterModal implements OnInit {
-  type: string = null;
+  @Input('filter') filter: any;
+  type: string = 'all';
   types = [
-    {title: 'Semua', value: null},
+    {title: 'Semua', value: 'all'},
     {title: 'Pemasukan', value: 'income'},
     {title: 'Pengeluaran', value: 'expense'}
   ];
@@ -25,6 +26,20 @@ export class TransactionFilterModal implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.type = this.filter.type;
+    if (this.filter.orderBy == 'date') {
+      if (this.filter.orderDir == 'desc') {
+        this.sort = 'newest';
+      } else {
+        this.sort = 'oldest';
+      }
+    } else if (this.filter.orderBy == 'amount') {
+      if (this.filter.orderDir == 'desc') {
+        this.sort = 'highest';
+      } else {
+        this.sort = 'lowest';
+      }
+    }
   }
 
   onSelectType(type: string = null) {
@@ -36,6 +51,22 @@ export class TransactionFilterModal implements OnInit {
   }
 
   onSubmit() {
-    this.modalController.dismiss();
+    this.filter.type = this.type;
+    if (this.sort == 'newest') {
+      this.filter.orderBy = 'date';
+      this.filter.orderDir = 'desc';
+    } else if (this.sort == 'oldest') {
+      this.filter.orderBy = 'date';
+      this.filter.orderDir = 'asc';
+    } else if (this.sort == 'highest') {
+      this.filter.orderBy = 'amount';
+      this.filter.orderDir = 'desc';
+    } else if (this.sort == 'lowest') {
+      this.filter.orderBy = 'amount';
+      this.filter.orderDir = 'asc';
+    }
+    this.modalController.dismiss({
+      filter: this.filter
+    });
   }
 }

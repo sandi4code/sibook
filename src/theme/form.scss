@@ -1,6 +1,6 @@
 .input {
   margin-bottom: 16px;
-  input, select {
+  input, select, ion-select {
     appearance: none;
     background: #fff;
     border: 1px solid #f1f1fa;
@@ -38,7 +38,7 @@
     }
   }
   &.invalid {
-    input {
+    input, select, ion-select, textarea {
       border-color: #cf3c4f;
       color: #cf3c4f;
     }

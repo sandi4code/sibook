@@ -1,6 +1,9 @@
 app-income {
   background: #00A86B;
 }
+app-expense {
+  background: #FD3C4A;
+}
 a {
   text-decoration: none;
 }
@@ -40,6 +43,8 @@ a {
       p {
         color: #91919F;
         font-size: 12px;
+        text-overflow: initial;
+        white-space: normal;
       }
       &:last-child {
         text-align: right;
@@ -65,4 +70,19 @@ a {
 }
 .modal-filter {
   --border-radius: 16px 16px 0 0;
+}
+.select-option {
+  .action-sheet-wrapper {
+    border-radius: 16px 16px 0 0;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+  .action-sheet-group:first-child {
+    border-radius: 16px 16px 0 0;
+  }
+}
+.acsheet {
+  .action-sheet-group:first-child {
+    border-radius: 16px 16px 0 0;
+  }
 }

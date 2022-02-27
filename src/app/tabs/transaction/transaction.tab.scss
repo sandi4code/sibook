@@ -6,9 +6,10 @@ app-transaction-tab {
     ion-toolbar {
       --background: #fff;
       ion-buttons {
-        ion-button.btn-filter-month {
-          --border-color: #f1f1fa !important;
-          --border-radius: 20px !important;
+        .btn-filter-month {
+          border: 2px solid #f1f1fa !important;
+          border-radius: 20px !important;
+          font-size: 14px;
           height: 40px;
           --padding-top: 12px;
           --padding-bottom: 12px;
@@ -33,6 +34,47 @@ app-transaction-tab {
   ion-content {
     --background: linear-gradient(180deg, #fff 70%, rgba(139, 80, 255, 0.24) 100%);
     --padding-bottom: 84px;
+    .summary {
+      border-radius: 0px 0px 32px 32px;
+      padding: 16px;
+      .in-out {
+        display: flex;
+        justify-content: space-between;
+        .in, .out {
+          align-items: center;
+          border-radius: 20px;
+          color: #fcfcfc;
+          display: flex;
+          flex: 1;
+          padding: 12px;
+          ion-icon {
+            color: #fcfcfc;
+            height: 40px;
+            width: 40px;
+            margin-right: 8px;
+          }
+          h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 0 4px;
+          }
+          h4 {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1;
+            margin: 0;
+          }
+        }
+        .in {
+          background: #00A86B;
+          margin-right: 6px;
+        }
+        .out {
+          background: #FD3C4A;
+          margin-left: 6px;
+        }
+      }
+    }
     .transaction {
       ion-item {
         --background: #fcfcfc;

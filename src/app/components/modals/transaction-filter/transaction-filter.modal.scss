@@ -19,8 +19,12 @@ ion-content {
   }
   .filter {
     margin-bottom: 24px;
-    ion-button.button-outline {
-      --border-width: 1px;
+    ion-button {
+      font-size: 14px;
+      height: 28px;
+      &.button-outline {
+        --border-width: 1px;
+      }
     }
   }
 }

@@ -39,7 +39,6 @@ app-home-tab {
       }
       .in-out {
         display: flex;
-        gap: 12px;
         justify-content: space-between;
         .in, .out {
           align-items: center;
@@ -57,19 +56,22 @@ app-home-tab {
           h3 {
             font-size: 14px;
             font-weight: 600;
-            margin: 0;
+            margin: 0 0 4px;
           }
           h4 {
             font-size: 14px;
             font-weight: 400;
+            line-height: 1;
             margin: 0;
           }
         }
         .in {
           background: #00A86B;
+          margin-right: 6px;
         }
         .out {
           background: #FD3C4A;
+          margin-left: 6px;
         }
       }
     }
@@ -96,43 +98,6 @@ app-home-tab {
       }
       ion-item {
         --background: rgba(252, 252, 252, 0.75);
-        border-radius: 20px;
-        margin-bottom: 8px;
-        ion-icon {
-          height: 40px;
-          width: 40px;
-          margin-inline-end: 16px;
-        }
-        ion-label {
-          h3 {
-            color: #292B2D;
-            font-size: 16px;
-            font-weight: 500;
-          }
-          p {
-            color: #91919F;
-            font-size: 14px;
-          }
-          &:last-child {
-            text-align: right;
-          }
-        }
-        &.in {
-          ion-icon {
-            color: #c1e5d8;
-          }
-          .amount {
-            color: #00A86B;
-          }
-        }
-        &.out {
-          ion-icon {
-            color: #FDD5D7;
-          }
-          .amount {
-            color: #FD3C4A;
-          }
-        }
       }
     }
   }

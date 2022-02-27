@@ -30,6 +30,9 @@ ion-content {
         font-weight: 600;
         outline: none;
         width: 100%;
+        &.invalid {
+          color: #cf3c4f;
+        }
       }
     }
   }

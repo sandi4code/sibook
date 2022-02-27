@@ -1,9 +1,38 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>expense</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title mode="ios">Pengeluaran</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="container">
+    <div class="amount">
+      <ion-label>Berapa jumlahnya?</ion-label>
+      <input type="text" inputmode="numeric" currencyMask
+        [ngClass]="{'invalid': isValidated && amount == 0}"
+        [(ngModel)]="amount"
+        (click)="amountFocus = true"
+        (focus)="amountFocus = true"
+        (blur)="amountFocus = false">
+    </div>
+    <div class="details" *ngIf="!amountFocus">
+      <div class="input" [ngClass]="{'invalid': isValidated && date == ''}">
+        <input type="date" [(ngModel)]="date" placeholder="Tanggal" required>
+      </div>
+      <div class="input" [ngClass]="{'invalid': isValidated && category == ''}" *ngIf="categoryList.length > 0">
+        <ion-select [(ngModel)]="category" interface="action-sheet" [interfaceOptions]="{cssClass:'select-option',header:'Pilih Kategori'}" placeholder="Kategori">
+          <ion-select-option *ngFor="let cat of categoryList" [value]="cat.name">{{cat.label}}</ion-select-option>
+        </ion-select>
+      </div>
+      <div class="input" [ngClass]="{'invalid': isValidated && description == ''}">
+        <textarea rows="3" [(ngModel)]="description" placeholder="Keterangan"></textarea>
+      </div>
+      <ion-button (click)="onSubmit()" expand="block" color="primary">
+        Simpan
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

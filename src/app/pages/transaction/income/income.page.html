@@ -11,22 +11,23 @@
   <div class="container">
     <div class="amount">
       <ion-label>Berapa jumlahnya?</ion-label>
-      <input type="text" currencyMask
+      <input type="text" inputmode="numeric" currencyMask
+        [ngClass]="{'invalid': isValidated && amount == 0}"
         [(ngModel)]="amount"
         (click)="amountFocus = true"
         (focus)="amountFocus = true"
         (blur)="amountFocus = false">
     </div>
     <div class="details" *ngIf="!amountFocus">
-      <div class="input">
+      <div class="input" [ngClass]="{'invalid': isValidated && date == ''}">
         <input type="date" [(ngModel)]="date" placeholder="Tanggal" required>
       </div>
-      <div class="input">
-        <select [(ngModel)]="category" placeholder="Kategori">
-          <option value=""></option>
-        </select>
+      <div class="input" [ngClass]="{'invalid': isValidated && category == ''}" *ngIf="categoryList.length > 0">
+        <ion-select [(ngModel)]="category" interface="action-sheet" [interfaceOptions]="{cssClass:'select-option',header:'Pilih Kategori'}" placeholder="Kategori">
+          <ion-select-option *ngFor="let cat of categoryList" [value]="cat.name">{{cat.label}}</ion-select-option>
+        </ion-select>
       </div>
-      <div class="input">
+      <div class="input" [ngClass]="{'invalid': isValidated && description == ''}">
         <textarea rows="3" [(ngModel)]="description" placeholder="Keterangan"></textarea>
       </div>
       <ion-button (click)="onSubmit()" expand="block" color="primary">
