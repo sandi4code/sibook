@@ -1,9 +1,6 @@
 {
-	"appId": "com.sinursa.sibook",
-	"appName": "sibook",
+	"appId": "id.ziovano.zibook",
+	"appName": "ZiBook",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.100.188:8100"
-	}
+	"bundledWebRuntime": false
 }

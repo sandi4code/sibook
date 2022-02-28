@@ -1,4 +1,4 @@
-package com.sinursa.sibook;
+package id.ziovano.zibook;
 
 import com.getcapacitor.BridgeActivity;
 

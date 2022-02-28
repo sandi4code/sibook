@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">sibook</string>
-    <string name="title_activity_main">sibook</string>
-    <string name="package_name">com.sinursa.sibook</string>
-    <string name="custom_url_scheme">com.sinursa.sibook</string>
+    <string name="app_name">ZiBook</string>
+    <string name="title_activity_main">ZiBook</string>
+    <string name="package_name">id.ziovano.zibook</string>
+    <string name="custom_url_scheme">id.ziovano.zibook</string>
 </resources>

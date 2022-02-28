@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">Filter</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="secondary" fill="solid" shape="round">
+        Reset
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <h3>Filter Berdasarkan</h3>
+  <div class="filter">
+    <ng-container *ngFor="let t of types">
+      <ion-button (click)="onSelectType(t.value)" 
+        [fill]="type == t.value ? 'solid':'outline'"
+        [color]="type == t.value ? 'secondary':'medium'"
+        shape="round" size="small">
+        {{t.title}}
+      </ion-button>
+    </ng-container>
+  </div>
+  <h3>Urutkan Berdasarkan</h3>
+  <div class="filter">
+    <ng-container *ngFor="let s of sorts">
+      <ion-button (click)="onSelectSort(s.value)" 
+        [fill]="sort == s.value ? 'solid':'outline'"
+        [color]="sort == s.value ? 'secondary':'medium'"
+        shape="round" size="small">
+        {{s.title}}
+      </ion-button>
+    </ng-container>
+  </div>
+  <ion-button (click)="onSubmit()" expand="block" shape="round">
+    Terapkan
+  </ion-button>
+</ion-content>

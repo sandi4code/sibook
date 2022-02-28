@@ -1,6 +1,6 @@
 {
-	"appId": "com.sinursa.sibook",
-	"appName": "sibook",
+	"appId": "id.ziovano.zibook",
+	"appName": "ZiBook",
 	"webDir": "www",
 	"bundledWebRuntime": false
 }

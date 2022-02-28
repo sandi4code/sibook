@@ -1,8 +1,8 @@
 {
-  "name": "sibook",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "name": "zibook",
+  "version": "1.0.0",
+  "author": "Ziovano Technology",
+  "homepage": "https://ziovano.id/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=8800",

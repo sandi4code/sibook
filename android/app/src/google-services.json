@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264315181897",
+    "project_id": "sinursa-sibook",
+    "storage_bucket": "sinursa-sibook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264315181897:android:4ec9b983ed82a6734f5898",
+        "android_client_info": {
+          "package_name": "id.ziovano.zibook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264315181897-1lqdvh1tm4n7vai1l0atraa8qdmkmogl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMRFo3-DDw7k0AenKnFsyEYPpa9aMjZlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264315181897-1lqdvh1tm4n7vai1l0atraa8qdmkmogl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
