@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Keyboard } from '@capacitor/keyboard';
 import { NavController } from '@ionic/angular';
-import { CategoryService } from 'src/app/services/category.service';
-import { TransactionService } from 'src/app/services/transaction.service';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import * as moment from 'moment';
 
 @Component({

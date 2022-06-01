@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BalanceService } from "../../services/balance.service";
-import { CategoryService } from 'src/app/services/category.service';
-import { TransactionService } from 'src/app/services/transaction.service';
+import { BalanceService } from "../../shared/services/balance.service";
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
 import firebase from 'firebase/compat';
 import * as moment from 'moment';
 

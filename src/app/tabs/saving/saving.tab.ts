@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { CategoryService } from 'src/app/services/category.service';
-import { SavingService } from 'src/app/services/saving.service';
-import { SavingFilterModal } from 'src/app/components/modals/saving-filter/saving-filter.modal';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { SavingService } from 'src/app/shared/services/saving.service';
+import { SavingFilterModal } from 'src/app/shared/components/modals/saving-filter/saving-filter.modal';
 import * as moment from 'moment';
 
 @Component({

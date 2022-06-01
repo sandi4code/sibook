@@ -10,3 +10,5 @@ export const environment = {
     measurementId: 'G-JWMZDYP4J6'
   }
 };
+
+export const TOKEN_KEY = 'zvt9821j21jd';

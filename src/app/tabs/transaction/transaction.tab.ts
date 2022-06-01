@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { CategoryService } from 'src/app/services/category.service';
-import { TransactionService } from 'src/app/services/transaction.service';
-import { TransactionFilterModal } from 'src/app/components/modals/transaction-filter/transaction-filter.modal';
+import { CategoryService } from 'src/app/shared/services/category.service';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
+import { TransactionFilterModal } from 'src/app/shared/components/modals/transaction-filter/transaction-filter.modal';
 import * as moment from 'moment';
 
 @Component({

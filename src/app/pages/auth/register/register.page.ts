@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { updateProfile } from 'firebase/auth';
 import { NavController, ToastController } from '@ionic/angular';
-import { BalanceService } from 'src/app/services/balance.service';
+import { BalanceService } from 'src/app/shared/services/balance.service';
 
 @Component({
   selector: 'app-register',
