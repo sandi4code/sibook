@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>
       <div class="greeting">{{greeting()}}, </div>
-      {{user?.displayName}}
+      {{user?.name}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button>
@@ -15,7 +15,7 @@
   <div class="summary">
     <div class="balance">
       <ion-label>Saldo</ion-label>
-      {{balance?.value | rupiah}}
+      {{balance | rupiah}}
     </div>
     <div class="in-out">
       <div class="in">

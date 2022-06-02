@@ -2,7 +2,7 @@ ion-tab-bar {
   border-radius: 24px 24px 0 0;
   height: 64px;
   --border: 0;
-  --background: transparent;
+  --background: #96f;
   background: transparent url(../../assets/nav.svg) no-repeat center bottom;
   position: absolute;
   bottom: 0;
@@ -10,14 +10,15 @@ ion-tab-bar {
   right: 0;
   width: 100%;
   ion-tab-button {
-    background: #fcfcfc;
+    background: #96f;
+    color: #fff;
     flex: 1;
     max-width: 25%;
     &.tab-selected {
       ion-label {
         display: block;
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: scale(1.1) translateY(0);
       }
     }
     ion-label {

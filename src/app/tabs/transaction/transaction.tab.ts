@@ -40,12 +40,6 @@ export class TransactionTab implements OnInit {
   }
 
   fetchData() {
-    this.transactionService
-      .get(this.filter)
-      .valueChanges({ idField: 'id' })
-      .subscribe((res) => {
-        this.items = res;
-      });
   }
 
   fetchCategory() {
@@ -58,12 +52,6 @@ export class TransactionTab implements OnInit {
   }
 
   fetchSummary() {
-    this.transactionService
-      .getSummaryList()
-      .valueChanges({ idField: 'month' })
-      .subscribe((res) => {
-        this.summaryList = res;
-      });
   }
 
   summaryIncome() {
@@ -105,7 +93,6 @@ export class TransactionTab implements OnInit {
   }
 
   onDelete(item: any) {
-    this.transactionService.delete(item);
   }
 
   async openAction(item: any) {

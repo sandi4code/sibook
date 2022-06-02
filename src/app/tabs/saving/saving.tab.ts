@@ -40,30 +40,12 @@ export class SavingTab implements OnInit {
   }
 
   fetchData() {
-    this.savingService
-      .get(this.filter)
-      .valueChanges({ idField: 'id' })
-      .subscribe((res) => {
-        this.items = res;
-      });
   }
 
   fetchCategory() {
-    this.categoryService
-      .get()
-      .valueChanges({ idField: 'id' })
-      .subscribe((res) => {
-        this.categoryList = res;
-      });
   }
 
   fetchSummary() {
-    this.savingService
-      .getSummaryList()
-      .valueChanges({ idField: 'month' })
-      .subscribe((res) => {
-        this.summaryList = res;
-      });
   }
 
   summaryIncome() {

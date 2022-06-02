@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BalanceService } from "../../shared/services/balance.service";
-import { CategoryService } from 'src/app/shared/services/category.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
-import firebase from 'firebase/compat';
 import * as moment from 'moment';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-home-tab',
@@ -14,16 +12,20 @@ import * as moment from 'moment';
   encapsulation: ViewEncapsulation.None
 })
 export class HomePage implements OnInit {
-  user: firebase.User;
-  balance: any;
+  user: any;
+  balance: number = 0;
   summary: any;
   transactions = [];
   categoryList = [];
+  loading = {
+    balance: false,
+    summary: false,
+    transaction: false,
+  }
 
   constructor(
-    private auth: AngularFireAuth,
+    private userService: UserService,
     private balanceService: BalanceService,
-    private categoryService: CategoryService,
     private transactionService: TransactionService,
     private navCtrl: NavController,
     private actionSheetController: ActionSheetController
@@ -31,14 +33,7 @@ export class HomePage implements OnInit {
   }
 
   async ngOnInit() {
-    this.user = await this.auth.currentUser;
-    this.balanceService.get(this.user.uid).valueChanges().subscribe(
-      r => this.balance = r
-    );
-    this.categoryService.get().valueChanges().subscribe(res => {
-      this.categoryList = res;
-      console.log(this.categoryList);
-    });
+    this.user = this.userService.getUserInfo();
     this.fetchSummary();
     this.fetchTransaction();
   }
@@ -58,19 +53,19 @@ export class HomePage implements OnInit {
     return message;
   }
 
-  async fetchSummary() {
-    let month = moment().format('YYYY-MM');
-    let docRef = this.transactionService.getSummary(month);
-    docRef.valueChanges().subscribe(res => {
-      this.summary = res;
+  fetchBalance() {
+    this.loading.balance = true;
+    this.balanceService.getCurrentBalance().toPromise().then(res => {
+      this.balance = res.balance;
+      this.loading.balance = false;
     });
   }
 
+  async fetchSummary() {
+    let month = moment().format('YYYY-MM');
+  }
+
   fetchTransaction() {
-    this.transactionService.getLatest().valueChanges({ idField: 'id' }).subscribe((res) => {
-      this.transactions = res;
-      console.log(res);
-    });
   }
 
   categoryLabel(name: string) {
@@ -82,7 +77,6 @@ export class HomePage implements OnInit {
   }
 
   onDelete(item: any) {
-    this.transactionService.delete(item);
   }
 
   async openAction(item: any) {

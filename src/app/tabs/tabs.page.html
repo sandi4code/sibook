@@ -1,25 +1,25 @@
-<ion-tabs>
+<ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()">
 
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
-      <ion-icon name="storefront-outline"></ion-icon>
+      <ion-icon [name]="tabIcon('home')"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="transaction">
-      <ion-icon name="card-outline"></ion-icon>
+      <ion-icon [name]="tabIcon('transaction')"></ion-icon>
       <ion-label>Transaksi</ion-label>
     </ion-tab-button>
 
     <div class="tab-spacer"></div>
 
     <ion-tab-button tab="debt">
-      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-icon [name]="tabIcon('debt')"></ion-icon>
       <ion-label>Hutang</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="saving">
-      <ion-icon name="cash-outline"></ion-icon>
+      <ion-icon [name]="tabIcon('saving')"></ion-icon>
       <ion-label>Tabungan</ion-label>
     </ion-tab-button>
   </ion-tab-bar>

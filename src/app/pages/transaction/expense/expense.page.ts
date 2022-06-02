@@ -75,9 +75,7 @@ export class ExpensePage implements OnInit, OnDestroy {
 
     if (this.id == '') {
       Object.assign(params, { created_at: moment().toISOString() });
-      await this.transactionService.create(params);
     } else {
-      await this.transactionService.update(this.id, params, this.amountOld);
     }
 
     this.navCtrl.back();
