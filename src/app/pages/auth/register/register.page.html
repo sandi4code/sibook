@@ -10,7 +10,7 @@
 <ion-content class="ion-padding">
   <div class="container">
     <div class="input" [ngClass]="{'invalid': name.invalid && (name.dirty || name.touched)}">
-      <input type="text" placeholder="Nama" [formControl]="name" required>
+      <input type="text" placeholder="Nama" [formControl]="name" charOnly required>
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
         <div *ngIf="name.errors?.['required']">
           Nama harus diisi.
@@ -25,6 +25,17 @@
         </div>
         <div *ngIf="email.errors?.['email']">
           Format email salah.
+        </div>
+      </div>
+    </div>
+    <div class="input" [ngClass]="{'invalid': phone.invalid && (phone.dirty || phone.touched)}">
+      <input type="text" inputmode="phone" placeholder="Nomor Handphone" [formControl]="phone" digitOnly required>
+      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert">
+        <div *ngIf="phone.errors?.['required']">
+          Nomor handphone harus diisi.
+        </div>
+        <div *ngIf="password.errors?.['minlength']">
+          Nomor handphone minimal 9 angka.
         </div>
       </div>
     </div>

@@ -9,14 +9,14 @@
 
 <ion-content class="ion-padding">
   <div class="container">
-    <div class="input" [ngClass]="{'invalid': email.invalid && (email.dirty || email.touched)}">
-      <input type="text" inputmode="email" placeholder="Email" [formControl]="email" required>
-      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
-        <div *ngIf="email.errors?.['required']">
-          Email harus diisi.
+    <div class="input" [ngClass]="{'invalid': phone.invalid && (phone.dirty || phone.touched)}">
+      <input type="text" inputmode="phone" placeholder="Nomor Handphone" [formControl]="phone"  required>
+      <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert">
+        <div *ngIf="phone.errors?.['required']">
+          Nomor handphone harus diisi.
         </div>
-        <div *ngIf="email.errors?.['email']">
-          Format email salah.
+        <div *ngIf="phone.errors?.['minlength']">
+          Format nomor handphone salah.
         </div>
       </div>
     </div>

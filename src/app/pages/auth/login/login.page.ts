@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { NavController, ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  providers: [AuthService]
 })
 export class LoginPage implements OnInit {
-  email = new FormControl('', [Validators.required, Validators.email]);
+  phone = new FormControl('', [Validators.required, Validators.minLength(9)]);
   password = new FormControl('', [Validators.required, Validators.minLength(8)]);
   loading = false;
   constructor(
-    private auth: AngularFireAuth,
+    private authService: AuthService,
+    private userService: UserService,
     private navCtrl: NavController,
     private toastCtrl: ToastController
   ) {
@@ -28,23 +31,28 @@ export class LoginPage implements OnInit {
       return;
     }
     this.loading = true;
-    this.auth.signInWithEmailAndPassword(this.email.value, this.password.value).then(async (u) => {
+    const data = {
+      phone: this.phone.value,
+      password: this.password.value
+    };
+    this.authService.login(data).then(async (res) => {
+      this.userService.setToken(res.token);
+      this.userService.setUserInfo(res);
       this.navCtrl.navigateRoot(['tabs/home'], { replaceUrl: true });
       this.loading = false;
     }).catch(e => {
       this.loading = false;
-      const message = e.message.replace('Firebase: ', '');
-      this.showError(message);
+      this.showError(e.message);
     });
   }
 
   validate() {
-    this.email.markAsDirty();
+    this.phone.markAsDirty();
     this.password.markAsDirty();
   }
 
   isValid() {
-    return this.email.valid && this.password.valid;
+    return this.phone.valid && this.password.valid;
   }
 
   async showError(message: string) {
