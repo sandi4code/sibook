@@ -122,10 +122,6 @@ export class TransactionTab implements OnInit {
       mode: 'ios',
       swipeToClose: true,
       keyboardClose: true,
-      handle: true,
-      backdropBreakpoint: 10,
-      breakpoints: [50, 100],
-      initialBreakpoint: 50
     });
 
     await modal.present();
