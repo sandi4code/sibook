@@ -1,30 +1,20 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService {
-  private path = '/categories/';
-
-  constructor(
-    private db: AngularFirestore
-  ) {
+export class CategoryService extends ApiService {
+  getCategories() {
+    return this.get('category', {});
   }
 
-  get() {
-    return this.db.collection(this.path);
+  getLocalCategories() {
+    const categories = localStorage.getItem('categories');
+    return (categories) ? JSON.parse(categories) : [];
   }
 
-  create(params: any): any {
-    return this.db.collection(this.path).add(params);
-  }
-
-  update(id: string, params: any): Promise<void> {
-    return this.db.collection(this.path).doc(id).set(params);
-  }
-
-  delete(id: string): Promise<void> {
-    return this.db.collection(this.path).doc(id).delete();
+  setLocalCategories(categories: any[]) {
+    localStorage.setItem('categories', JSON.stringify(categories));
   }
 }

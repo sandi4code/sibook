@@ -3,8 +3,8 @@ import { ActionSheetController, ModalController, NavController } from '@ionic/an
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SavingService } from 'src/app/shared/services/saving.service';
-import { SavingFilterModal } from 'src/app/shared/components/modals/saving-filter/saving-filter.modal';
 import * as moment from 'moment';
+import { TransactionFilterModal } from 'src/app/shared/components/modals/transaction-filter/transaction-filter.modal';
 
 @Component({
   selector: 'app-saving-tab',
@@ -62,7 +62,7 @@ export class SavingTab implements OnInit {
 
   async presentFilter() {
     const modal = await this.modalController.create({
-      component: SavingFilterModal,
+      component: TransactionFilterModal,
       componentProps: {
         filter: this.filter
       },

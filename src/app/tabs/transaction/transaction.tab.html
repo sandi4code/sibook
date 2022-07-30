@@ -1,16 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-select
-        [(ngModel)]="filter.month"
-        (ionChange)="fetchData()"
-        [interfaceOptions]="{cssClass: 'select-option', header: 'Pilih Bulan'}"
-        interface="action-sheet"
-        placeholder="Pilih Bulan"
-        class="btn-filter-month">
-        <ion-select-option *ngFor="let s of summaryList" [value]="s.month">{{s.month | date:'MMMM YYYY'}}</ion-select-option>
-      </ion-select>
-    </ion-buttons>
+    <ion-title>Transaksi</ion-title>
     <ion-buttons slot="end">
       <ion-button class="btn-filter" fill="outline" (click)="presentFilter()">
         <ion-icon slot="icon-only" name="filter-outline"></ion-icon>
@@ -19,19 +9,22 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="summary">
     <div class="in-out">
       <div class="in">
         <ion-icon slot="start" src="../../../assets/icon/summary-income.svg"></ion-icon>
         <div>
-          <h3>{{summaryIncome() | rupiah}}</h3>
+          <h3>{{summary?.income | rupiah}}</h3>
           <h4>Pemasukan</h4>
         </div>
       </div>
       <div class="out">
         <ion-icon slot="start" src="../../../assets/icon/summary-expense.svg"></ion-icon>
         <div>
-          <h3>{{summaryExpense() | rupiah}}</h3>
+          <h3>{{summary?.expense | rupiah}}</h3>
           <h4>Pengeluaran</h4>
         </div>
       </div>
@@ -39,31 +32,44 @@
   </div>
 
   <div class="transaction">
-    <ion-list>
-      <ng-container *ngFor="let item of items">
-        <ion-item button (click)="openAction(item)" class="in" lines="none" *ngIf="item?.type == 'income'">
-          <ion-icon src="../../../assets/icon/summary-income.svg" slot="start"></ion-icon>
-          <ion-label>
-            <h3>{{categoryLabel(item.category_id)}}</h3>
-            <p>{{item.description}}</p>
-          </ion-label>
-          <ion-label slot="end">
-            <h3 class="amount">{{item.amount | rupiah}}</h3>
-            <p>{{item.date | date}}</p>
-          </ion-label>
-        </ion-item>
-        <ion-item button (click)="openAction(item)" class="out" lines="none" *ngIf="item?.type == 'expense'">
-          <ion-icon src="../../../assets/icon/summary-expense.svg" slot="start"></ion-icon>
-          <ion-label>
-            <h3>{{categoryLabel(item.category_id)}}</h3>
-            <p>{{item.description}}</p>
-          </ion-label>
-          <ion-label slot="end">
-            <h3 class="amount">{{item.amount | rupiah}}</h3>
-            <p>{{item.date | date}}</p>
-          </ion-label>
-        </ion-item>
+    <ion-list *ngIf="transaction$ | async as transactions">
+      <ng-container *ngIf="transactions.length > 0 else emptyState">
+        <ng-container *ngFor="let item of transactions">
+          <ion-item button (click)="openAction(item)" class="in" lines="none" *ngIf="item?.type == 'income'">
+            <ion-icon src="../../../assets/icon/summary-income.svg" slot="start"></ion-icon>
+            <ion-label>
+              <h3>{{item.category_name}}</h3>
+              <p>{{item.description}}</p>
+            </ion-label>
+            <ion-label slot="end">
+              <h3 class="amount">{{item.amount | rupiah}}</h3>
+              <p>{{item.date | date}}</p>
+            </ion-label>
+          </ion-item>
+          <ion-item button (click)="openAction(item)" class="out" lines="none" *ngIf="item?.type == 'expense'">
+            <ion-icon src="../../../assets/icon/summary-expense.svg" slot="start"></ion-icon>
+            <ion-label>
+              <h3>{{item.category_name}}</h3>
+              <p>{{item.description}}</p>
+            </ion-label>
+            <ion-label slot="end">
+              <h3 class="amount">{{item.amount | rupiah}}</h3>
+              <p>{{item.date | date}}</p>
+            </ion-label>
+          </ion-item>
+        </ng-container>
       </ng-container>
     </ion-list>
   </div>
+  <ion-infinite-scroll threshold="25%" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+<ng-template #emptyState>
+  <div class="empty">
+    <ion-icon slot="icon-only" name="clipboard"></ion-icon>
+    <h3>Kosong nih</h3>
+    <h4>Belum ada transaksi di bulan ini</h4>
+  </div>
+</ng-template>

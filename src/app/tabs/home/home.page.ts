@@ -1,9 +1,15 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, NavController } from '@ionic/angular';
-import { BalanceService } from "../../shared/services/balance.service";
+import { CategoryService } from 'src/app/shared/services/category.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
-import * as moment from 'moment';
 import { UserService } from 'src/app/shared/services/user.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { scan, switchMap, tap } from 'rxjs/operators'
+import * as moment from 'moment';
+
+interface RefresherCustomEvent extends CustomEvent {
+  target: HTMLIonRefresherElement;
+}
 
 @Component({
   selector: 'app-home-tab',
@@ -15,7 +21,6 @@ export class HomePage implements OnInit {
   user: any;
   balance: number = 0;
   summary: any;
-  transactions = [];
   categoryList = [];
   loading = {
     balance: false,
@@ -23,19 +28,34 @@ export class HomePage implements OnInit {
     transaction: false,
   }
 
+  #refresherEvent: RefresherCustomEvent;
+
+  userSubject$ = new BehaviorSubject(1);
+  user$ = new Observable<any>();
+
+  transactionSubject$ = new BehaviorSubject(1);
+  transaction$ = new Observable<any[]>();
+
   constructor(
     private userService: UserService,
-    private balanceService: BalanceService,
+    private categoryService: CategoryService,
     private transactionService: TransactionService,
     private navCtrl: NavController,
     private actionSheetController: ActionSheetController
   ) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.user = this.userService.getUserInfo();
-    this.fetchSummary();
-    this.fetchTransaction();
+    this.getUser();
+    this.getTransaction();
+    this.getCategories();
+    this.getSummary();
+  }
+
+  ngOnDestroy(): void {
+    this.userSubject$.complete();
+    this.transactionSubject$.complete();
   }
 
   greeting() {
@@ -53,23 +73,56 @@ export class HomePage implements OnInit {
     return message;
   }
 
-  fetchBalance() {
-    this.loading.balance = true;
-    this.balanceService.getCurrentBalance().toPromise().then(res => {
-      this.balance = res.balance;
-      this.loading.balance = false;
+  doRefresh(event) {
+    this.#refresherEvent = event;
+    this.userSubject$.complete();
+    this.transactionSubject$.complete();
+    this.getUser();
+    this.getTransaction();
+    this.getCategories();
+  }
+
+  getUser() {
+    this.userSubject$ = new BehaviorSubject(1);
+    this.user$ = this.userSubject$.pipe(
+      switchMap(() => this.userService.getUser()),
+      scan((acc: any[], items: any[]) => [...acc, ...items]),
+      tap(() => {
+        if (this.#refresherEvent) {
+          this.#refresherEvent.target.complete();
+          this.#refresherEvent = null;
+        }
+      })
+    );
+  }
+
+  getTransaction() {
+    this.transactionSubject$ = new BehaviorSubject(1);
+    this.transaction$ = this.transactionSubject$.pipe(
+      switchMap(() => this.transactionService.getTransaction({page: 1, limit: 10})),
+      scan((acc: any[], items: any[]) => [...acc, ...items]),
+      tap(() => {
+        if (this.#refresherEvent) {
+          this.#refresherEvent.target.complete();
+          this.#refresherEvent = null;
+        }
+      })
+    );
+  }
+
+  getCategories() {
+    this.categoryService.getCategories().subscribe((res) => {
+      this.categoryList = res;
+      this.categoryService.setLocalCategories(res);
     });
   }
 
-  async fetchSummary() {
-    let month = moment().format('YYYY-MM');
-  }
-
-  fetchTransaction() {
-  }
-
-  categoryLabel(name: string) {
-    return this.categoryList.find(c => c.name == name)?.label;
+  async getSummary() {
+    let month = new Date().getMonth();
+    let year = new Date().getFullYear();
+    this.transactionService.getSummary(month, year).subscribe(res => {
+      this.summary = res;
+    });
   }
 
   onEdit(item: any) {

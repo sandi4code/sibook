@@ -22,6 +22,8 @@ ion-content {
     ion-button {
       font-size: 14px;
       height: 28px;
+      --padding-start: 16px;
+      --padding-end: 16px;
       &.button-outline {
         --border-width: 1px;
       }

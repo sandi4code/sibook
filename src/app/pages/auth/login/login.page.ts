@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
       this.loading = false;
     }).catch(e => {
       this.loading = false;
-      this.showError(e.message);
+      this.showError(e.error ? e.error.message : e.message);
     });
   }
 

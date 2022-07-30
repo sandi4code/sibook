@@ -6,6 +6,9 @@ app-transaction-tab {
     }
     ion-toolbar {
       --background: var(--ion-color-primary);
+      ion-title {
+        color: #fff;
+      }
       ion-buttons {
         .btn-filter-month {
           border: 2px solid #f1f1fa !important;
@@ -82,6 +85,22 @@ app-transaction-tab {
     .transaction {
       ion-item {
         --background: #fcfcfc;
+      }
+    }
+    .empty {
+      text-align: center;
+      ion-icon {
+        color: #cacaca;
+        font-size: 72px;
+      }
+      h3 {
+        color: #909090;
+        font-size: 1.4rem;
+      }
+      h4 {
+        color: #909090;
+        font-size: 1rem;
+        margin: 4px 0;
       }
     }
   }

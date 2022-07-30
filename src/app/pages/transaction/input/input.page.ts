@@ -7,21 +7,22 @@ import { TransactionService } from 'src/app/shared/services/transaction.service'
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-income',
-  templateUrl: './income.page.html',
-  styleUrls: ['./income.page.scss'],
+  selector: 'app-transaction-input',
+  templateUrl: './input.page.html',
+  styleUrls: ['./input.page.scss'],
 })
-export class IncomePage implements OnInit, OnDestroy {
-  id = '';
-  amount = 0;
-  amountOld = 0;
-  amountFocus = false;
-  date = '';
-  description = '';
-  category = '';
-  categoryList = [];
+export class TransactionInputPage implements OnInit, OnDestroy {
+  id: string = '';
+  amount: number = 0;
+  amountOld: number = 0;
+  amountFocus: boolean = false;
+  date: string = '';
+  description: string = '';
+  category: string = '';
+  categoryList: any[] = [];
   currentBalance: any;
-  isValidated = false;
+  isValidated: boolean = false;
+  type: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,9 @@ export class IncomePage implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private transactionService: TransactionService
   ) {
+    this.type = this.route.snapshot.queryParamMap.get('type');
+    console.log(this.type)
+
     if (this.route.snapshot.paramMap.has('id')) {
       let data = this.route.snapshot.params;
       this.id = data.id;
@@ -46,7 +50,7 @@ export class IncomePage implements OnInit, OnDestroy {
         this.amountFocus = false;
       }
     });
-    this.categoryService.get().valueChanges().subscribe(res => this.categoryList = res);
+    this.categoryList = this.categoryService.getLocalCategories();
   }
 
   ngOnDestroy(): void {
@@ -63,19 +67,19 @@ export class IncomePage implements OnInit, OnDestroy {
       return;
     }
 
-    let params = {
+    let data = {
       amount: this.amount,
       date: this.date,
-      month: this.date.substring(0, 7),
       category_id: this.category,
-      category_name: this.categoryList.find(c => c.name == this.category)?.label,
       description: this.description,
       type: 'income'
     }
 
     if (this.id == '') {
-      Object.assign(params, { created_at: moment().toISOString() });
+      await this.transactionService.create(data).toPromise();
     } else {
+      Object.assign(data, { id: this.id });
+      await this.transactionService.update(data).toPromise();
     }
 
     this.navCtrl.back();

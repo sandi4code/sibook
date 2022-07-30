@@ -1,13 +1,13 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar [ngClass]="{'income': type === 'income', 'expense': type === 'expense'}">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title mode="ios">Pemasukan</ion-title>
+    <ion-title mode="ios">{{ type === 'income' ? 'Pemasukan' : 'Pengeluaran' }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [ngClass]="{'income': type === 'income', 'expense': type === 'expense'}">
   <div class="container">
     <div class="amount">
       <ion-label>Berapa jumlahnya?</ion-label>
@@ -24,7 +24,7 @@
       </div>
       <div class="input" [ngClass]="{'invalid': isValidated && category == ''}" *ngIf="categoryList.length > 0">
         <ion-select [(ngModel)]="category" interface="action-sheet" [interfaceOptions]="{cssClass:'select-option',header:'Pilih Kategori'}" placeholder="Kategori">
-          <ion-select-option *ngFor="let cat of categoryList" [value]="cat.name">{{cat.label}}</ion-select-option>
+          <ion-select-option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</ion-select-option>
         </ion-select>
       </div>
       <div class="input" [ngClass]="{'invalid': isValidated && description == ''}">

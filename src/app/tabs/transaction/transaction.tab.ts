@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { CategoryService } from 'src/app/shared/services/category.service';
+import { ActionSheetController, InfiniteScrollCustomEvent, ModalController, NavController, RefresherCustomEvent } from '@ionic/angular';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { TransactionFilterModal } from 'src/app/shared/components/modals/transaction-filter/transaction-filter.modal';
 import * as moment from 'moment';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, scan, switchMap, tap } from 'rxjs/operators';
+import { TransactionFilter, TransactionRequest } from 'src/app/shared/interfaces/transaction';
 
 @Component({
   selector: 'app-transaction-tab',
@@ -16,16 +17,24 @@ export class TransactionTab implements OnInit {
   user: any;
   items = [];
   categoryList = [];
-  summaryList = [];
-  filter = {
+  summary: any;
+  filter: TransactionFilter = {
     month: moment().format('YYYY-MM'),
     orderBy: 'date',
     orderDir: 'desc',
     type: 'all'
   }
+  page = 1;
+  limit = 10;
+  isScrollEnd = false;
+
+  #infiniteEvent: InfiniteScrollCustomEvent;
+  #refresherEvent: RefresherCustomEvent;
+
+  transactionSubject$ = new BehaviorSubject({ page: this.page, limit: this.limit });
+  transaction$ = new Observable<any[]>();
+
   constructor(
-    private auth: AngularFireAuth,
-    private categoryService: CategoryService,
     private transactionService: TransactionService,
     private navController: NavController,
     private modalController: ModalController,
@@ -33,33 +42,71 @@ export class TransactionTab implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.user = await this.auth.currentUser;
-    this.fetchCategory();
-    this.fetchSummary();
-    this.fetchData();
+    this.init();
   }
 
-  fetchData() {
+  ionViewWillEnter() {
+    this.getSummary();
   }
 
-  fetchCategory() {
-    this.categoryService
-      .get()
-      .valueChanges({ idField: 'id' })
-      .subscribe((res) => {
-        this.categoryList = res;
-      });
+  init() {
+    this.transactionSubject$ = new BehaviorSubject({ page: this.page, limit: this.limit });
+    this.transaction$ = this.transactionSubject$.pipe(
+      switchMap(({ page, limit }) => this.getTransaction(page, limit)),
+      scan((acc: any[], items: any[]) => [...acc, ...items]),
+      tap(() => {
+        if (this.#refresherEvent) {
+          this.#refresherEvent.target.complete();
+          this.#refresherEvent = null;
+        }
+        if (this.#infiniteEvent) {
+          this.#infiniteEvent.target.complete();
+          this.#infiniteEvent = null;
+        }
+      })
+    );
   }
 
-  fetchSummary() {
+  doRefresh(event = null) {
+    this.page = 1;
+    this.isScrollEnd = false;
+    this.#refresherEvent = event;
+    this.transactionSubject$.complete();
+    this.init();
   }
 
-  summaryIncome() {
-    return this.summaryList.find(s => s.month == this.filter.month)?.income | 0;
+  loadMore(event) {
+    this.page += 1;
+    this.#infiniteEvent = event;
+    this.transactionSubject$.next({ page: this.page, limit: this.limit });
   }
 
-  summaryExpense() {
-    return this.summaryList.find(s => s.month == this.filter.month)?.expense | 0;
+  getTransaction(page: number, limit: number) {
+    let params: TransactionRequest = {
+      month: this.filter.month,
+      orderBy: this.filter.orderBy,
+      orderDir: this.filter.orderDir,
+      type: this.filter.type,
+      page: page,
+      limit: limit
+    };
+    return this.transactionService.getTransaction(params).pipe(
+      tap((result) => {
+        console.log(result)
+        if (result.length == 0) {
+          this.isScrollEnd = true;
+        }
+      }),
+      catchError(() => {
+        return of([]);
+      })
+    );
+  }
+
+  async getSummary() {
+    this.transactionService.getSummary('', '').subscribe(res => {
+      this.summary = res;
+    });
   }
 
   categoryLabel(name: string) {
@@ -72,18 +119,20 @@ export class TransactionTab implements OnInit {
       componentProps: {
         filter: this.filter
       },
-      cssClass: 'modal-filter',
-      initialBreakpoint: 0.5,
-      breakpoints: [0, 0.5, 1],
+      mode: 'ios',
       swipeToClose: true,
-      keyboardClose: true
+      keyboardClose: true,
+      handle: true,
+      backdropBreakpoint: 10,
+      breakpoints: [50, 100],
+      initialBreakpoint: 50
     });
 
     await modal.present();
     modal.onWillDismiss().then(e => {
       if (e.data?.filter) {
         this.filter = e.data.filter;
-        this.fetchData();
+        this.doRefresh(null);
       }
     });
   }

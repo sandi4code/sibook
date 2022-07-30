@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { TOKEN_KEY } from 'src/environments/environment';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-
-  constructor() { }
-
+export class UserService extends ApiService {
   isLoggedIn() {
     let token = localStorage.getItem(TOKEN_KEY);
     return token ?? false;
@@ -24,5 +22,9 @@ export class UserService {
   getUserInfo() {
     let user = JSON.parse(localStorage.getItem('user_info'));
     return user;
+  }
+
+  getUser() {
+    return this.get('user', {});
   }
 }

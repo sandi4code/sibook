@@ -15,7 +15,7 @@ export const environment = {
   }
 };
 
-export const API_URL = 'http://localhost:3001/v1/';
+export const API_URL = 'http://localhost:1001/v1/';
 export const TOKEN_KEY = 'zvt9821j21jd';
 
 /*

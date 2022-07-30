@@ -30,11 +30,7 @@ export class TabsPage {
     }
   }
 
-  toIncomePage() {
-    this.navCtrl.navigateForward('transaction/income');
-  }
-
-  toExpensePage() {
-    this.navCtrl.navigateForward('transaction/expense');
+  toInputPage(type: string) {
+    this.navCtrl.navigateForward('transaction/input?type='+type);
   }
 }

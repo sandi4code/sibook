@@ -1,21 +1,31 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TransactionFilter } from 'src/app/shared/interfaces/transaction';
 
+interface FilterSort {
+  title: string
+  value: string
+}
+
+interface FilterType {
+  title: string
+  value: string
+}
 @Component({
   selector: 'app-transaction-filter',
   templateUrl: './transaction-filter.modal.html',
   styleUrls: ['./transaction-filter.modal.scss']
 })
 export class TransactionFilterModal implements OnInit {
-  @Input('filter') filter: any;
+  @Input('filter') filter: TransactionFilter;
   type: string = 'all';
-  types = [
+  types: FilterType[] = [
     {title: 'Semua', value: 'all'},
     {title: 'Pemasukan', value: 'income'},
     {title: 'Pengeluaran', value: 'expense'}
   ];
   sort: string = 'newest';
-  sorts = [
+  sorts: FilterSort[] = [
     {title: 'Terbaru', value: 'newest'},
     {title: 'Terlama', value: 'oldest'},
     {title: 'Termahal', value: 'highest'},

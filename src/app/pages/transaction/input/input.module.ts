@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
-import { IncomePageRoutingModule } from './income-routing.module';
+import { TransactionInputPageRoutingModule } from './input-routing.module';
 
-import { IncomePage } from './income.page';
+import { TransactionInputPage } from './input.page';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { IncomePage } from './income.page';
     FormsModule,
     IonicModule,
     CurrencyMaskModule,
-    IncomePageRoutingModule
+    TransactionInputPageRoutingModule
   ],
-  declarations: [IncomePage]
+  declarations: [TransactionInputPage]
 })
-export class IncomePageModule {}
+export class TransactionInputPageModule {}

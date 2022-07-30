@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <h3>Filter Berdasarkan</h3>
+  <h3>Saring Berdasarkan</h3>
   <div class="filter">
     <ng-container *ngFor="let t of types">
       <ion-button (click)="onSelectType(t.value)" 
@@ -31,7 +31,11 @@
       </ion-button>
     </ng-container>
   </div>
-  <ion-button (click)="onSubmit()" expand="block" shape="round">
-    Terapkan
-  </ion-button>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="onSubmit()" expand="block" shape="round">
+      Terapkan
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

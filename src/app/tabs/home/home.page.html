@@ -12,10 +12,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="summary">
     <div class="balance">
       <ion-label>Saldo</ion-label>
-      {{balance | rupiah}}
+      <ng-container *ngIf="user$ | async as u; else balanceLoading">
+        {{u.balance | rupiah}}
+      </ng-container>
+      <ng-template #balanceLoading>
+        <ion-skeleton-text animated style="height: 38px; width: 40%; margin: 0 auto;"></ion-skeleton-text>
+      </ng-template>
     </div>
     <div class="in-out">
       <div class="in">
@@ -41,12 +49,12 @@
         Lihat Semua
       </ion-button>
     </h2>
-    <ion-list>
+    <ion-list *ngIf="transaction$ | async as transactions">
       <ng-container *ngFor="let item of transactions">
         <ion-item button (click)="openAction(item)" class="in" lines="none" *ngIf="item?.type == 'income'">
           <ion-icon src="../../../assets/icon/summary-income.svg" slot="start"></ion-icon>
           <ion-label>
-            <h3>{{categoryLabel(item.category_id)}}</h3>
+            <h3>{{item.category_name}}</h3>
             <p>{{item.description}}</p>
           </ion-label>
           <ion-label slot="end">
@@ -57,7 +65,7 @@
         <ion-item button (click)="openAction(item)" class="out" lines="none" *ngIf="item?.type == 'expense'">
           <ion-icon src="../../../assets/icon/summary-expense.svg" slot="start"></ion-icon>
           <ion-label>
-            <h3>{{categoryLabel(item.category_id)}}</h3>
+            <h3>{{item.category_name}}</h3>
             <p>{{item.description}}</p>
           </ion-label>
           <ion-label slot="end">
