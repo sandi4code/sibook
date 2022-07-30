@@ -46,14 +46,16 @@ workflows:
           ./gradlew assembleRelease
     artifacts:
       - android/app/build/outputs/**/*.apk
-    # publishing:
+    publishing:
     #   google_play:
     #     credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
     #     track: internal # <-- Any default or custom track that is not in ‘draft’ status
-    #   email:
-    #     recipients:
-    #       - user_one@example.com
-    #       - user_two@example.com
-    #     notify:
-    #       success: true     # To not receive a notification when a build succeeds
-    #       failure: false     # To not receive a notification when a build fails
+      slack:
+        channel: '#apk-build'
+        notify_on_build_start: true
+      email:
+        recipients:
+          - sandi4code@gmail.com
+        notify:
+          success: true     # To not receive a notification when a build succeeds
+          failure: false     # To not receive a notification when a build fails
