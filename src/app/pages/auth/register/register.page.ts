@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { updateProfile } from 'firebase/auth';
 import { NavController, ToastController } from '@ionic/angular';
 import { BalanceService } from 'src/app/shared/services/balance.service';
 import { AuthService } from 'src/app/shared/services/auth.service';

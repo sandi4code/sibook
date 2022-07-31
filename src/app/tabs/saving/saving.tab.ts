@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { CategoryService } from 'src/app/shared/services/category.service';
 import { SavingService } from 'src/app/shared/services/saving.service';
 import * as moment from 'moment';
@@ -24,7 +23,6 @@ export class SavingTab implements OnInit {
     type: 'all'
   }
   constructor(
-    private auth: AngularFireAuth,
     private categoryService: CategoryService,
     private savingService: SavingService,
     private navController: NavController,
@@ -33,7 +31,6 @@ export class SavingTab implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.user = await this.auth.currentUser;
     this.fetchCategory();
     this.fetchSummary();
     this.fetchData();

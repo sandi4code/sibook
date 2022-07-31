@@ -6,6 +6,6 @@ import { ApiService } from './api.service';
 })
 export class BalanceService extends ApiService {
   getCurrentBalance() {
-    return this.get('balance', {});
+    return this.get('transaction/balance', {});
   }
 }

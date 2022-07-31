@@ -18,8 +18,8 @@
   <div class="summary">
     <div class="balance">
       <ion-label>Saldo</ion-label>
-      <ng-container *ngIf="user$ | async as u; else balanceLoading">
-        {{u.balance | rupiah}}
+      <ng-container *ngIf="balance$ | async as b; else balanceLoading">
+        {{b.amount | rupiah}}
       </ng-container>
       <ng-template #balanceLoading>
         <ion-skeleton-text animated style="height: 38px; width: 40%; margin: 0 auto;"></ion-skeleton-text>

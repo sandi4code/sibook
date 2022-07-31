@@ -1,14 +1,23 @@
 <ion-header>
   <ion-toolbar>
     <ion-title slot="start">Filter</ion-title>
-    <ion-buttons slot="end">
-      <ion-button color="secondary" fill="solid" shape="round">
-        Reset
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <h3>Pilih Bulan & Tahun</h3>
+  <ion-item>
+    <ion-label>Bulan</ion-label>
+    <ion-select [(ngModel)]="month" interface="action-sheet" placeholder="Bulan">
+      <ion-select-option *ngFor="let m of months" [value]="m.value">{{m.title}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Tahun</ion-label>
+    <ion-select [(ngModel)]="year" interface="action-sheet" placeholder="Tahun">
+      <ion-select-option *ngFor="let y of years" [value]="y">{{y}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <br>
   <h3>Saring Berdasarkan</h3>
   <div class="filter">
     <ng-container *ngFor="let t of types">

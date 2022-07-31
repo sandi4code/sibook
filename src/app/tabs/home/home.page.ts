@@ -5,6 +5,7 @@ import { TransactionService } from 'src/app/shared/services/transaction.service'
 import { UserService } from 'src/app/shared/services/user.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { scan, switchMap, tap } from 'rxjs/operators'
+import { BalanceService } from 'src/app/shared/services/balance.service';
 import * as moment from 'moment';
 
 interface RefresherCustomEvent extends CustomEvent {
@@ -30,14 +31,15 @@ export class HomePage implements OnInit {
 
   #refresherEvent: RefresherCustomEvent;
 
-  userSubject$ = new BehaviorSubject(1);
-  user$ = new Observable<any>();
+  balanceSubject$ = new BehaviorSubject(1);
+  balance$ = new Observable<any>();
 
   transactionSubject$ = new BehaviorSubject(1);
   transaction$ = new Observable<any[]>();
 
   constructor(
     private userService: UserService,
+    private balanceService: BalanceService,
     private categoryService: CategoryService,
     private transactionService: TransactionService,
     private navCtrl: NavController,
@@ -47,14 +49,14 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getUserInfo();
-    this.getUser();
+    this.getBalance();
     this.getTransaction();
     this.getCategories();
     this.getSummary();
   }
 
   ngOnDestroy(): void {
-    this.userSubject$.complete();
+    this.balanceSubject$.complete();
     this.transactionSubject$.complete();
   }
 
@@ -75,17 +77,18 @@ export class HomePage implements OnInit {
 
   doRefresh(event) {
     this.#refresherEvent = event;
-    this.userSubject$.complete();
+    this.balanceSubject$.complete();
     this.transactionSubject$.complete();
-    this.getUser();
+    this.getBalance();
     this.getTransaction();
+    this.getSummary();
     this.getCategories();
   }
 
-  getUser() {
-    this.userSubject$ = new BehaviorSubject(1);
-    this.user$ = this.userSubject$.pipe(
-      switchMap(() => this.userService.getUser()),
+  getBalance() {
+    this.balanceSubject$ = new BehaviorSubject(1);
+    this.balance$ = this.balanceSubject$.pipe(
+      switchMap(() => this.balanceService.getCurrentBalance()),
       scan((acc: any[], items: any[]) => [...acc, ...items]),
       tap(() => {
         if (this.#refresherEvent) {
@@ -118,8 +121,8 @@ export class HomePage implements OnInit {
   }
 
   async getSummary() {
-    let month = new Date().getMonth();
-    let year = new Date().getFullYear();
+    let month = moment().format('MM');
+    let year = moment().format('YYYY');
     this.transactionService.getSummary(month, year).subscribe(res => {
       this.summary = res;
     });

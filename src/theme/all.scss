@@ -68,8 +68,10 @@ a {
     }
   }
 }
-.modal-filter {
-  --border-radius: 16px 16px 0 0;
+ion-modal.filter-modal {
+  --height: 500px;
+  --border-radius: 16px;
+  padding: 16px;
 }
 .select-option {
   .action-sheet-wrapper {

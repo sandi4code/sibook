@@ -72,7 +72,7 @@ export class TransactionInputPage implements OnInit, OnDestroy {
       date: this.date,
       category_id: this.category,
       description: this.description,
-      type: 'income'
+      type: this.type
     }
 
     if (this.id == '') {

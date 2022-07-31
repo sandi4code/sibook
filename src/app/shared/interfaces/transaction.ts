@@ -16,6 +16,7 @@ export interface Transaction {
 
 export interface TransactionFilter {
   month: string
+  year: string
   orderBy: string
   orderDir: string
   type: string
@@ -23,6 +24,7 @@ export interface TransactionFilter {
 
 export interface TransactionRequest {
   month?: string
+  year?: string
   orderBy?: string
   orderDir?: string
   type?: string

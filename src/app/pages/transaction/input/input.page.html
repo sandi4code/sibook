@@ -23,7 +23,7 @@
         <input type="date" [(ngModel)]="date" placeholder="Tanggal" required>
       </div>
       <div class="input" [ngClass]="{'invalid': isValidated && category == ''}" *ngIf="categoryList.length > 0">
-        <ion-select [(ngModel)]="category" interface="action-sheet" [interfaceOptions]="{cssClass:'select-option',header:'Pilih Kategori'}" placeholder="Kategori">
+        <ion-select [(ngModel)]="category" interface="action-sheet" [interfaceOptions]="{mode:'ios',cssClass:'select-option',header:'Pilih Kategori'}" placeholder="Kategori">
           <ion-select-option *ngFor="let cat of categoryList" [value]="cat.id">{{cat.name}}</ion-select-option>
         </ion-select>
       </div>
